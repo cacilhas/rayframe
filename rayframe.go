@@ -13,7 +13,7 @@ type intVector2D = struct {
 type RayFrame struct {
 	Camera     *raylib.Camera
 	FPS        int
-	OnRezise   func(w, h int)
+	OnRezise   func(int, int)
 	Tick       time.Time
 	WindowSize intVector2D
 }

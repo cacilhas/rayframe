@@ -3,7 +3,7 @@ package rayframe
 import "time"
 
 type UpdateScene interface {
-	Update(dt time.Duration) interface{}
+	Update(time.Duration) interface{}
 }
 
 func updateScene(scene interface{}, frame *RayFrame, dt time.Duration) interface{} {
