@@ -51,6 +51,8 @@ frame.Mainloop(scene)
 
 `scene` can be any structure pointer.
 
+`Scene` is an alias to `interface{}`.
+
 ### Scene
 
 Each scene may implement any of the following methods:
@@ -60,13 +62,13 @@ Each scene may implement any of the following methods:
 - `Background() color.RBGA`: inform the framework which colour to use when
   painting the background. If not implemented, the framework won’t call
   `raylib.ClearBackground()`.
-- `Update(time.Duration) interface{}`: called each tick and receives the
-  timedelta since last tick.
-- `Render2D() interface{}`: used to render 2D assets.
-- `Render3D() interface{}`: used to render 3D assets under 3D mode, **if** the
+- `Update(time.Duration) Scene`: called each tick and receives the
+  time delta since the last tick.
+- `Render2D() Scene`: used to render 2D assets.
+- `Render3D() Scene`: used to render 3D assets under 3D mode, **if** the
   framework’s `Camera` is set.
 
-If any `interface{}`-return method returns anything but the calling scene
+If any `Scene`-returning method returns anything but the calling scene
 itself, the framework will change the scene by the return value and will call
 `Init()` (if it’s implemented).
 

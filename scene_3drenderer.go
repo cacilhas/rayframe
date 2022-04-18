@@ -5,10 +5,10 @@ import (
 )
 
 type RendererScene3D interface {
-	Render3D() interface{}
+	Render3D() Scene
 }
 
-func renderScene3D(scene interface{}, frame *RayFrame) interface{} {
+func renderScene3D(scene Scene, frame *RayFrame) Scene {
 	res := scene
 	if frame.Camera == nil {
 		return res

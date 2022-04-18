@@ -10,7 +10,7 @@ type BackgroundScene interface {
 	Background() color.RGBA
 }
 
-func drawBackground(scene interface{}) {
+func drawBackground(scene Scene) {
 	if sc, ok := scene.(BackgroundScene); ok {
 		raylib.ClearBackground(sc.Background())
 	}

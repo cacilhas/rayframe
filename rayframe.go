@@ -28,7 +28,7 @@ func (frame *RayFrame) Init(width, height int, title string) {
 	}
 }
 
-func (frame *RayFrame) Mainloop(initialScene interface{}) {
+func (frame *RayFrame) Mainloop(initialScene Scene) {
 	frame.resize()
 	scene := initialiseScene(nil, initialScene, frame)
 	frame.Tick = time.Now()
@@ -41,7 +41,7 @@ func (frame *RayFrame) Mainloop(initialScene interface{}) {
 	raylib.CloseWindow()
 }
 
-func (frame *RayFrame) tic(scene interface{}) interface{} {
+func (frame *RayFrame) tic(scene Scene) Scene {
 	dt := time.Since(frame.Tick)
 	frame.Tick = time.Now()
 	if raylib.IsWindowResized() {

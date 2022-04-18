@@ -4,7 +4,15 @@ type InitScene interface {
 	Init(*RayFrame)
 }
 
-func initialiseScene(before, after interface{}, frame *RayFrame) interface{} {
+// If called with (nil, scene, frame), Init() method is called on the scene, and
+// the scene is returned.
+// If called with (scene, nil, frame), Init() method isn’t called, and the
+// scene is returned.
+// If called with (scene, scene, frame), Init() method isn’t called, and the
+// scene is returned.
+// If called with (sceneA, sceneB, frame), Init() method is called on the
+// sceneB, and the sceneB is returned.
+func initialiseScene(before, after Scene, frame *RayFrame) Scene {
 	if after == nil {
 		return before
 	}
