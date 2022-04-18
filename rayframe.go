@@ -58,7 +58,8 @@ func (frame *RayFrame) tic(scene interface{}) interface{} {
 }
 
 func (frame *RayFrame) resize() {
-	if raylib.IsWindowFullscreen() {
+	fullscreen := raylib.IsWindowFullscreen()
+	if fullscreen {
 		currentMonitor := raylib.GetCurrentMonitor()
 		frame.WindowSize = intVector2D{
 			X: raylib.GetMonitorWidth(currentMonitor),
@@ -71,6 +72,6 @@ func (frame *RayFrame) resize() {
 		}
 	}
 	if frame.OnResize != nil {
-		frame.OnResize(frame.WindowSize.X, frame.WindowSize.Y, raylib.IsWindowFullscreen())
+		frame.OnResize(frame.WindowSize.X, frame.WindowSize.Y, fullscreen)
 	}
 }
