@@ -38,6 +38,7 @@ func (rf *RayFrame) Mainloop(initialScene interface{}) {
 			time.Sleep(time.Second/time.Duration(rf.FPS) - time.Since(rf.Tick))
 		}
 	}
+	raylib.CloseWindow()
 }
 
 func (rf *RayFrame) tic(scene interface{}) interface{} {
