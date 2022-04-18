@@ -50,8 +50,9 @@ func (rf *RayFrame) tic(scene interface{}) interface{} {
 
 	raylib.BeginDrawing()
 	drawBackground(scene)
-	scene = renderScene3D(scene, rf, dt)
-	scene = renderScene2D(scene, rf, dt)
+	scene = updateScene(scene, dt)
+	scene = renderScene3D(scene, rf)
+	scene = renderScene2D(scene, rf)
 	raylib.EndDrawing()
 	return scene
 }
