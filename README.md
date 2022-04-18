@@ -19,14 +19,14 @@ frame := &rayframe.RayFrame{}
 
 The fields you can set are:
 
-- `Camera`: a `*raylib.Camera` for 3D rendering
-- `FPS`: how many frames per second
-- `OnResize`: a callback (`func(int, int)`) called whenever the window is resized
+- `Camera *raylib.Camera`: for 3D rendering
+- `FPS int`: how many frames per second
+- `OnResize func(int, int)`: a callback called whenever the window is resized
 
 The fields you can read:
 
-- `Tick`: last tick time
-- `WindowSize`: current window size (`struct { X, Y int }`)
+- `Tick time.Time`: last tick time
+- `WindowSize struct{ X, Y int }`: current window size
 
 ### Starting the framework
 
@@ -63,7 +63,7 @@ Each scene may implement any of the following methods:
   timedelta since last tick.
 - `Render2D() interface{}`: used to render 2D assets.
 - `Render3D() interface{}`: used to render 3D assets under 3D mode, **if** the
-  framework’s `Camera` isn’t `nil`.
+  framework’s `Camera` is set.
 
 If any `interface{}`-return method returns anything but the calling scene
 itself, the framework will change the scene by the return value and will call
