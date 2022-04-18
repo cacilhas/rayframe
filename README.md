@@ -49,7 +49,7 @@ Then start the main loop by calling:
 frame.Mainloop(scene)
 ```
 
-`scene` can be any structure point.
+`scene` can be any structure pointer.
 
 ### Scene
 
@@ -74,4 +74,4 @@ itself, the framework will change the scene by the return value and will call
 
 - Copyright ©2022 [Arĥimedeς Montegasppα Cacilhας][email]
 - [3-Clause BSD License][bsd-3-clause]
-- [COPYING](/cacilhas/rayframe/blob/master/COPYING)
+- [COPYING](/COPYING)
