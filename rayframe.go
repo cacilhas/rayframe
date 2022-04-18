@@ -13,7 +13,7 @@ type intVector2D = struct {
 type RayFrame struct {
 	Camera     *raylib.Camera
 	FPS        int
-	OnRezise   func(int, int, bool)
+	OnResize   func(int, int, bool)
 	Tick       time.Time
 	WindowSize intVector2D
 }
@@ -70,7 +70,7 @@ func (frame *RayFrame) resize() {
 			Y: raylib.GetScreenHeight(),
 		}
 	}
-	if frame.OnRezise != nil {
-		frame.OnRezise(frame.WindowSize.X, frame.WindowSize.Y, raylib.IsWindowFullscreen())
+	if frame.OnResize != nil {
+		frame.OnResize(frame.WindowSize.X, frame.WindowSize.Y, raylib.IsWindowFullscreen())
 	}
 }
