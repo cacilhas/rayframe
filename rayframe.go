@@ -13,6 +13,7 @@ type intVector2D = struct {
 type RayFrame struct {
 	Camera     *raylib.Camera
 	FPS        int
+	InFront3D  bool
 	OnResize   func(int, int, bool)
 	Tick       time.Time
 	WindowSize intVector2D
@@ -50,9 +51,15 @@ func (frame *RayFrame) tic(scene Scene) Scene {
 
 	raylib.BeginDrawing()
 	drawBackground(scene)
+	scene = onKeyEscape(scene, frame)
 	scene = updateScene(scene, frame, dt)
-	scene = renderScene3D(scene, frame)
-	scene = renderScene2D(scene, frame)
+	if frame.InFront3D {
+		scene = renderScene2D(scene, frame)
+		scene = renderScene3D(scene, frame)
+	} else {
+		scene = renderScene3D(scene, frame)
+		scene = renderScene2D(scene, frame)
+	}
 	raylib.EndDrawing()
 	return scene
 }

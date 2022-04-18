@@ -21,6 +21,7 @@ func initialiseScene(before, after Scene, frame *RayFrame) Scene {
 	}
 	if scene, ok := after.(InitScene); ok {
 		scene.Init(frame)
+		setExitKey(scene)
 	}
 	return after
 }

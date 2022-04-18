@@ -9,10 +9,10 @@ type RendererScene3D interface {
 }
 
 func renderScene3D(scene Scene, frame *RayFrame) Scene {
-	res := scene
 	if frame.Camera == nil {
-		return res
+		return scene
 	}
+	res := scene
 	if sc, ok := scene.(RendererScene3D); ok {
 		raylib.BeginMode3D(*frame.Camera)
 		res = initialiseScene(scene, sc.Render3D(), frame)

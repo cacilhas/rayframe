@@ -21,6 +21,7 @@ The fields you can set are:
 
 - `Camera *raylib.Camera`: for 3D rendering
 - `FPS int`: how many frames per second
+- `InFront3D bool`: whether 3D must be rendered in front of 2D rendering
 - `OnResize func(int, int, boot)`: a callback called whenever the window is
   resized, passing the new size (width and height) and whether it’s fullscreen.
 
@@ -62,6 +63,11 @@ Each scene may implement any of the following methods:
 - `Background() color.RBGA`: inform the framework which colour to use when
   painting the background. If not implemented, the framework won’t call
   `raylib.ClearBackground()`.
+- `ExitKey() int32`: which key is used to exit, default to
+  `raylib.KeyEscape`. Only works associated with `OnKeyEscape()`. Use zero (`0`)
+  to disable the exit key.
+- `OnKeyEscape() Scene`: what to do when the escape key is pressed. Only works
+  associated with `ExitKey()`. Return `nil` or the scene itself to do nothing.
 - `Update(time.Duration) Scene`: called each tick and receives the
   time delta since the last tick.
 - `Render2D() Scene`: used to render 2D assets.

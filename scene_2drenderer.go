@@ -5,9 +5,8 @@ type RendererScene2D interface {
 }
 
 func renderScene2D(scene Scene, frame *RayFrame) Scene {
-	res := scene
 	if sc, ok := scene.(RendererScene2D); ok {
-		res = initialiseScene(scene, sc.Render2D(), frame)
+		return initialiseScene(scene, sc.Render2D(), frame)
 	}
-	return res
+	return scene
 }
