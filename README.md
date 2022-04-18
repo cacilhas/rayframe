@@ -21,7 +21,8 @@ The fields you can set are:
 
 - `Camera *raylib.Camera`: for 3D rendering
 - `FPS int`: how many frames per second
-- `OnResize func(int, int)`: a callback called whenever the window is resized
+- `OnResize func(int, int, boot)`: a callback called whenever the window is
+  resized, passing the new size (width and height) and whether it’s fullscreen.
 
 The fields you can read:
 
