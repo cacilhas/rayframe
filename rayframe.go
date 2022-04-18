@@ -18,59 +18,59 @@ type RayFrame struct {
 	WindowSize intVector2D
 }
 
-func (rf *RayFrame) Init(width, height int, title string) {
-	rf.WindowSize = intVector2D{X: width, Y: height}
+func (frame *RayFrame) Init(width, height int, title string) {
+	frame.WindowSize = intVector2D{X: width, Y: height}
 	raylib.InitWindow(int32(width), int32(height), title)
-	if rf.FPS > 0 {
-		raylib.SetTargetFPS(int32(rf.FPS))
+	if frame.FPS > 0 {
+		raylib.SetTargetFPS(int32(frame.FPS))
 	} else {
 		raylib.SetTargetFPS(30)
 	}
 }
 
-func (rf *RayFrame) Mainloop(initialScene interface{}) {
-	rf.resize()
-	scene := initialiseScene(nil, initialScene, rf)
-	rf.Tick = time.Now()
+func (frame *RayFrame) Mainloop(initialScene interface{}) {
+	frame.resize()
+	scene := initialiseScene(nil, initialScene, frame)
+	frame.Tick = time.Now()
 	for !raylib.WindowShouldClose() {
-		scene = rf.tic(scene)
-		if rf.FPS > 0 {
-			time.Sleep(time.Second/time.Duration(rf.FPS) - time.Since(rf.Tick))
+		scene = frame.tic(scene)
+		if frame.FPS > 0 {
+			time.Sleep(time.Second/time.Duration(frame.FPS) - time.Since(frame.Tick))
 		}
 	}
 	raylib.CloseWindow()
 }
 
-func (rf *RayFrame) tic(scene interface{}) interface{} {
-	dt := time.Since(rf.Tick)
-	rf.Tick = time.Now()
+func (frame *RayFrame) tic(scene interface{}) interface{} {
+	dt := time.Since(frame.Tick)
+	frame.Tick = time.Now()
 	if raylib.IsWindowResized() {
-		rf.resize()
+		frame.resize()
 	}
 
 	raylib.BeginDrawing()
 	drawBackground(scene)
-	scene = updateScene(scene, dt)
-	scene = renderScene3D(scene, rf)
-	scene = renderScene2D(scene, rf)
+	scene = updateScene(scene, frame, dt)
+	scene = renderScene3D(scene, frame)
+	scene = renderScene2D(scene, frame)
 	raylib.EndDrawing()
 	return scene
 }
 
-func (rf *RayFrame) resize() {
+func (frame *RayFrame) resize() {
 	if raylib.IsWindowFullscreen() {
 		currentMonitor := raylib.GetCurrentMonitor()
-		rf.WindowSize = intVector2D{
+		frame.WindowSize = intVector2D{
 			X: raylib.GetMonitorWidth(currentMonitor),
 			Y: raylib.GetMonitorHeight(currentMonitor),
 		}
 	} else {
-		rf.WindowSize = intVector2D{
+		frame.WindowSize = intVector2D{
 			X: raylib.GetScreenWidth(),
 			Y: raylib.GetScreenHeight(),
 		}
 	}
-	if rf.OnRezise != nil {
-		rf.OnRezise(rf.WindowSize.X, rf.WindowSize.Y)
+	if frame.OnRezise != nil {
+		frame.OnRezise(frame.WindowSize.X, frame.WindowSize.Y)
 	}
 }

@@ -8,14 +8,14 @@ type RendererScene3D interface {
 	Render3D() interface{}
 }
 
-func renderScene3D(scene interface{}, rf *RayFrame) interface{} {
+func renderScene3D(scene interface{}, frame *RayFrame) interface{} {
 	res := scene
-	if rf.Camera == nil {
+	if frame.Camera == nil {
 		return res
 	}
 	if sc, ok := scene.(RendererScene3D); ok {
-		raylib.BeginMode3D(*rf.Camera)
-		res = initialiseScene(scene, sc.Render3D(), rf)
+		raylib.BeginMode3D(*frame.Camera)
+		res = initialiseScene(scene, sc.Render3D(), frame)
 		raylib.EndMode3D()
 	}
 	return res
